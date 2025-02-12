@@ -1,0 +1,45 @@
+volumes:
+  flujopay_backend_test_local_postgres_data: {}
+  flujopay_backend_test_local_postgres_data_backups: {}
+
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: flujopay_backend_test_local_django
+    container_name: flujopay_backend_test_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - '8000:8000'
+    command: /start
+    networks:
+      - flujopay_backend_test_local_network
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: flujopay_backend_test_production_postgres
+    container_name: flujopay_backend_test_local_postgres
+    volumes:
+      - flujopay_backend_test_local_postgres_data:/var/lib/postgresql/data
+      - flujopay_backend_test_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - flujopay_backend_test_local_network
+
+networks:
+  flujopay_backend_test_local_network:
+    driver: bridge
+    name: flujopay_backend_test_local_network
