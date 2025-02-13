@@ -14,19 +14,17 @@ if settings.DJANGO_ADMIN_FORCE_ALLAUTH:
     admin.autodiscover()
     admin.site.login = secure_admin_login(admin.site.login)  # type: ignore[method-assign]
 
-
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
     form = UserAdminChangeForm
     add_form = UserAdminCreationForm
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
-        (_("Personal info"), {"fields": ("name",)}),
+        (None, {"fields": ("email",  "password")}),
+        (_("Personal info"), {"fields": ("names", "surnames")}),
         (
             _("Permissions"),
             {
                 "fields": (
-                    "is_active",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -36,8 +34,9 @@ class UserAdmin(auth_admin.UserAdmin):
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
-    list_display = ["email", "name", "is_superuser"]
-    search_fields = ["name"]
+    list_display = ["id", "names", "surnames", "email", "is_staff", "is_superuser"]
+    list_display_links = ["id", "names", "surnames", "email"]
+    search_fields = ["names"]
     ordering = ["id"]
     add_fieldsets = (
         (
