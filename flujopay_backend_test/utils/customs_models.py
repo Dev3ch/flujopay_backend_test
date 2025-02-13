@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.timezone import now
 from model_utils.models import TimeStampedModel
 from simple_history.models import HistoricalRecords
 
