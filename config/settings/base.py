@@ -91,7 +91,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "flujopay_backend_test.app_users",
-    # Your stuff: custom apps go here
+    "flujopay_backend_test.app_routines",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
