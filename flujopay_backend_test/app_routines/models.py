@@ -76,12 +76,6 @@ class RoutineExercise(CustomModel):
 
 
 class ExerciseLog(CustomModel):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name="Usuario",
-        related_name="exercises_logs",
-    )
     routine_exercise = models.ForeignKey(
         RoutineExercise,
         on_delete=models.CASCADE,
@@ -90,4 +84,7 @@ class ExerciseLog(CustomModel):
     )
 
     def __str__(self):
-        return f"{self.user.username} - {self.routine_exercise} - {self.created}"
+        return (
+            f"{self.routine_exercise.routine.user.email} - "
+            f"{self.routine_exercise} - {self.created}"
+        )

@@ -194,7 +194,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "flujopay_backend_test.users.context_processors.allauth_settings",
+                "flujopay_backend_test.app_users.context_processors.allauth_settings",
             ],
         },
     },
