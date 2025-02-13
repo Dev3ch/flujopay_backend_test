@@ -48,7 +48,7 @@ class Routine(CustomModel):
         verbose_name_plural = "Rutinas"
 
     def __str__(self):
-        return f"{self.name} - {self.user.username}"
+        return f"{self.name} - {self.user.email}"
 
 
 class RoutineExercise(CustomModel):
